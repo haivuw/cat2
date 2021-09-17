@@ -47,6 +47,8 @@ export default function Home({ products, categories }) {
 export async function getServerSideProps() {
   console.log('???????')
   console.log(process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY)
+  console.log(process.env.GOOGLE_SERVICE_ACCOUNT_CLIENT_EMAIL)
+  console.log(process.env.GOOGLE_SPREADSHEET_ID_PRODUCT)
   const products = await getProducts();
   const categories = await getCategories();
 

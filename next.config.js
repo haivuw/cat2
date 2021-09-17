@@ -13,6 +13,10 @@ const { withPlugins } = require('next-compose-plugins');
 const withOptimizedImages = require('next-optimized-images');
 
 // next.js configuration
-const nextConfig = {};
+const nextConfig = {
+  typescript: {
+    ignoreBuildErrors: true
+  }
+};
 
 module.exports = withPlugins([withOptimizedImages], nextConfig);

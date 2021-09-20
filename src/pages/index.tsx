@@ -46,13 +46,15 @@ export default function Home({ products, categories }) {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({req, res}) => {
-  res.setHeader(
-    'Cache-Control',
-    'public, s-maxage=10, stale-while-revalidate=59'
-  )
+  // res.setHeader(
+  //   'Cache-Control',
+  //   'public, s-maxage=10, stale-while-revalidate=59'
+  // )
 
-  const products = await getProducts();
-  const categories = await getCategories();
+  // const products = await getProducts();
+  // const categories = await getCategories();
+  const products = []
+  const categories = []
 
   return {
     props: {

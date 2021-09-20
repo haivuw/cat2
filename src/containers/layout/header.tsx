@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import Link from 'next/link';
 import PhoneIcon from 'assets/icons/phone';
 import CartIcon from 'assets/icons/cart-icon';
@@ -7,6 +7,7 @@ import Search from 'components/search';
 import { DrawerContext } from 'contexts/drawer/drawer.provider';
 import { useCart } from 'contexts/cart/cart.provider';
 import { useRouter } from 'next/router';
+import UserIcon from 'assets/icons/user-icon';
 
 export default function Header() {
   const router = useRouter();
@@ -84,6 +85,14 @@ export default function Header() {
         >
           {itemsCount}
         </span>
+      </button>
+
+      <button
+        className="flex items-center justify-center flex-shrink-0 h-auto relative focus:outline-none ml-51px"
+        onClick={showCart}
+        aria-label="cart-button"
+      >
+        <UserIcon width="20px" height="20px" />
       </button>
     </header>
   );

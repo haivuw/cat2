@@ -8,17 +8,20 @@ import { DrawerProvider } from 'contexts/drawer/drawer.provider';
 import { SearchProvider } from 'contexts/search/use-search';
 import 'typeface-open-sans';
 import { CategoryProvider } from 'contexts/category/use-category';
+import AuthProvider from 'contexts/auth/provider';
 
 export default function CustomApp({ Component, pageProps }) {
   return (
-    <SearchProvider>
-      <CategoryProvider>
-        <DrawerProvider>
-          <CartProvider>
-            <Component {...pageProps} />
-          </CartProvider>
-        </DrawerProvider>
-      </CategoryProvider>
-    </SearchProvider>
+    <AuthProvider>
+      <SearchProvider>
+        <CategoryProvider>
+          <DrawerProvider>
+            <CartProvider>
+              <Component {...pageProps} />
+            </CartProvider>
+          </DrawerProvider>
+        </CategoryProvider>
+      </SearchProvider>
+    </AuthProvider>
   );
 }

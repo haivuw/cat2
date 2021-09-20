@@ -4,6 +4,8 @@ import ProductDetails from './views/product-details';
 import Cart from './views/cart';
 import Checkout from './views/checkout';
 import DrawerMenu from './views/menus';
+import User from './views/user';
+import Login from './views/login';
 
 export const CartDrawer = () => {
   const { state, dispatch } = useContext(DrawerContext);
@@ -29,7 +31,15 @@ export const CartDrawer = () => {
       return <Checkout />;
     }
 
-    return <Cart />;
+    if (state?.showUser === true) {
+      return <User />;
+    }
+
+    if (state?.showLogin === true) {
+      return <Login />;
+    }
+
+    return null;
   };
 
   return (

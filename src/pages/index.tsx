@@ -11,6 +11,7 @@ import { getProducts } from 'helpers/get-products';
 import { getCategories } from 'helpers/get-categories';
 import Categories from 'containers/categories';
 import { useCategory } from 'contexts/category/use-category';
+import { GetServerSideProps } from 'next';
 
 export default function Home({ products, categories }) {
   const { elRef, scroll } = useRefScroll({
@@ -44,7 +45,12 @@ export default function Home({ products, categories }) {
   );
 }
 
-export async function getServerSideProps() {
+export const getServerSideProps: GetServerSideProps = async ({req, res}) => {
+  res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=10, stale-while-revalidate=59'
+  )
+
   const products = await getProducts();
   const categories = await getCategories();
 

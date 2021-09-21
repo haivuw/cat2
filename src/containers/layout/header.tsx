@@ -26,15 +26,9 @@ export default function Header() {
 
   const showCart = () => {
     dispatch({
-      type: 'SLIDE_CART',
+      type: 'OPEN_VIEW',
       payload: {
-        open: true,
-      },
-    });
-    dispatch({
-      type: 'TOGGLE_CART_VIEW',
-      payload: {
-        showCart: true,
+        view: 'cart'
       },
     });
   };

@@ -12,7 +12,7 @@ export default function ProductDetails() {
   const { addItem, getItem, removeItem } = useCart();
   const { state, dispatch } = useContext(DrawerContext);
 
-  const count = getItem(state.item.id)?.quantity;
+  const count = getItem(state.product.id)?.quantity;
 
   const toggleVisibility = () => {
     setVisibility(!visibility);
@@ -20,26 +20,19 @@ export default function ProductDetails() {
 
   const hideDetails = () => {
     dispatch({
-      type: 'TOGGLE_PRODUCT_DETAIL',
+      type: 'OPEN_VIEW',
       payload: {
-        showDetails: false,
-      },
-    });
-
-    dispatch({
-      type: 'SLIDE_CART',
-      payload: {
-        open: false,
+        view: null
       },
     });
   };
 
   const addToCart = () => {
-    addItem(state.item);
+    addItem(state.product);
     dispatch({
-      type: 'TOGGLE_CART_VIEW',
+      type: 'OPEN_VIEW',
       payload: {
-        showCart: true,
+        view: 'cart'
       },
     });
   };
@@ -61,33 +54,33 @@ export default function ProductDetails() {
       <Scrollbar className="details-scrollbar flex-grow">
         <div className="flex flex-col p-30px pt-0">
           <div className="flex items-center justify-center w-full h-360px overflow-hidden rounded mb-30px">
-            <img src={state.item.image} alt={`${state.item.name}-img`} />
+            <img src={state.product.image} alt={`${state.product.name}-img`} />
           </div>
 
           <div className="flex flex-col items-start mb-4">
             <span className="text-gray-900 font-semibold mb-2">
               {CURRENCY}
-              {state.item.price}
+              {state.product.price}
             </span>
-            <span className="mb-3">{state.item.name}</span>
+            <span className="mb-3">{state.product.name}</span>
             <p className="flex items-center mb-5">
               <span className=" text-gray-500 text-11px capitalize">
-                {state.item.type}
+                {state.product.type}
               </span>
               <span className="flex bg-gray-500 w-3px h-3px rounded mx-3" />
               <span className=" text-gray-500 text-11px">
-                {state.item.quantity}{' '}
-                {state.item.quantity > 1 ? 'pieces' : 'piece'}
+                {state.product.quantity}{' '}
+                {state.product.quantity > 1 ? 'pieces' : 'piece'}
               </span>
             </p>
 
             {visibility === true ? (
-              <p className="my-5">{state.item.description}</p>
+              <p className="my-5">{state.product.description}</p>
             ) : (
               ''
             )}
 
-            {state.item.description && (
+            {state.product.description && (
               <button
                 className="font-semibold text-11px text-gray-800 mt-2 focus:outline-none"
                 onClick={toggleVisibility}
@@ -102,14 +95,14 @@ export default function ProductDetails() {
             <div className="flex flex-col justify-start full mt-10 pr-30px even:pr-0">
               <span className="text-gray-500 text-11px mb-2">Dosages Form</span>
               <span className="font-normal text-13px text-gray-900 capitalize">
-                {state.item.type}
+                {state.product.type}
               </span>
             </div>
 
             <div className="flex flex-col justify-start full mt-10 pr-30px even:pr-0">
               <span className="text-gray-500 text-11px mb-2">Dosages</span>
               <span className="font-normal text-13px text-gray-900 capitalize">
-                {state.item.dosage}
+                {state.product.dosage}
               </span>
             </div>
 
@@ -118,14 +111,14 @@ export default function ProductDetails() {
                 Active Substance
               </span>
               <span className="font-normal text-13px text-gray-900 capitalize">
-                {state.item.substance}
+                {state.product.substance}
               </span>
             </div>
 
             <div className="flex flex-col justify-start full mt-10 pr-30px even:pr-0">
               <span className="text-gray-500 text-11px mb-2">Manufacturer</span>
               <span className="font-normal text-13px text-gray-900 capitalize">
-                {state.item.manufacturer}
+                {state.product.manufacturer}
               </span>
             </div>
           </div>
@@ -139,9 +132,9 @@ export default function ProductDetails() {
             className="ml-auto w-full big"
             size="big"
             onIncrement={() => {
-              addItem(state.item);
+              addItem(state.product);
             }}
-            onDecrement={() => removeItem(state.item)}
+            onDecrement={() => removeItem(state.product)}
           />
         ) : (
           <Button className="w-full big" onClick={addToCart}>

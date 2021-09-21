@@ -15,24 +15,14 @@ export default function Login() {
   const { login } = useAuth();
   const { dispatch } = useContext(DrawerContext);
 
-  const hideUser = () => {
-    dispatch({
-      type: 'SLIDE_CART',
-      payload: {
-        showUser: false,
-      },
-    });
-    dispatch({
-      type: 'TOGGLE_LOGIN_VIEW',
-      payload: {
-        showLogin: false,
-      },
-    });
-  };
-
   const loginAndCloseDrawer = async (values) => {
     await login(values.email, values.password);
-    hideUser();
+    dispatch({
+      type: 'OPEN_VIEW',
+      payload: {
+        view: null
+      },
+    });
   }
 
   const formik = useFormik({

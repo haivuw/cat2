@@ -13,30 +13,18 @@ const User = () => {
 
   const showUser = () => {
     dispatch({
-      type: 'SLIDE_CART',
+      type: 'OPEN_VIEW',
       payload: {
-        open: true,
-      },
-    });
-    dispatch({
-      type: 'TOGGLE_USER_VIEW',
-      payload: {
-        showUser: true,
+        view: 'user',
       },
     });
   };
 
   const showLogin = () => {
     dispatch({
-      type: 'SLIDE_CART',
+      type: 'OPEN_VIEW',
       payload: {
-        open: true,
-      },
-    });
-    dispatch({
-      type: 'TOGGLE_LOGIN_VIEW',
-      payload: {
-        showLogin: true,
+        view: 'login',
       },
     });
   };

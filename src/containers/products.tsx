@@ -21,23 +21,10 @@ const Products = React.forwardRef(
 
     const showDetails = (item) => {
       dispatch({
-        type: 'STORE_PRODUCT_DETAIL',
+        type: 'OPEN_VIEW',
         payload: {
-          item: item,
-        },
-      });
-
-      dispatch({
-        type: 'SLIDE_CART',
-        payload: {
-          open: true,
-        },
-      });
-
-      dispatch({
-        type: 'TOGGLE_PRODUCT_DETAIL',
-        payload: {
-          showDetails: true,
+          view: 'product',
+          product: item
         },
       });
     };

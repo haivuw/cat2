@@ -30,21 +30,6 @@ export default function User() {
   const [formData, setFormData] = useState(initialState);
   const [error, setError] = useState(null);
 
-  const hideUser = () => {
-    dispatch({
-      type: 'SLIDE_CART',
-      payload: {
-        showUser: false,
-      },
-    });
-    dispatch({
-      type: 'TOGGLE_USER_VIEW',
-      payload: {
-        showUser: false,
-      },
-    });
-  };
-
   const onChange = (e) => {
     const { value, name } = e.currentTarget;
     setFormData({
@@ -55,7 +40,12 @@ export default function User() {
 
   const logoutAndCloseDrawer = async () => {
     await logout();
-    hideUser();
+    dispatch({
+      type: 'OPEN_VIEW',
+      payload: {
+        view: null
+      },
+    });
   }
 
   return (

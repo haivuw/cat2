@@ -32,9 +32,9 @@ export default function Checkout() {
 
   const hideCheckout = () => {
     dispatch({
-      type: 'TOGGLE_CHECKOUT_VIEW',
+      type: 'OPEN_VIEW',
       payload: {
-        showCheckout: false,
+        view: 'cart'
       },
     });
   };

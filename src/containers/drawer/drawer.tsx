@@ -12,47 +12,47 @@ export const CartDrawer = () => {
 
   const handleClose = () =>
     dispatch({
-      type: 'SLIDE_CART',
+      type: 'OPEN_VIEW',
       payload: {
-        open: false,
+        view: null,
       },
     });
+    
+  const drawerComponent = ((view) => {
+    switch (view) {
+      case 'product': 
+        return <ProductDetails />;
 
-  const drawerComponent = (state) => {
-    if (state?.showDetails === true) {
-      return <ProductDetails />;
+      case 'cart':
+        return <Cart />;
+
+      case 'checkout':
+        return <Checkout />;
+
+      case 'user':
+        return <User />;
+
+      case 'login':
+        return <Login />;
+
+      default:
+        return null
     }
-
-    if (state?.showCart === true) {
-      return <Cart />;
-    }
-
-    if (state?.showCheckout === true) {
-      return <Checkout />;
-    }
-
-    if (state?.showUser === true) {
-      return <User />;
-    }
-
-    if (state?.showLogin === true) {
-      return <Login />;
-    }
-
-    return null;
-  };
+  })(state?.view)
+  
+  
 
   return (
     <React.Fragment>
-      {state?.open === true ? (
+      {state.view ? (
         <div className="overlay" role="button" onClick={handleClose} />
       ) : (
         ''
       )}
       <div
-        className={`drawer drawer-cart ${state?.open === true ? 'open' : ''}`}
+        className={`drawer drawer-cart ${state.view ? 'open' : ''}`}
       >
-        {drawerComponent(state)}
+        {drawerComponent}
       </div>
     </React.Fragment>
   );

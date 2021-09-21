@@ -7,9 +7,9 @@ export default function OrderSubmit() {
   const { dispatch } = useContext(DrawerContext);
   const hideCart = () => {
     dispatch({
-      type: 'SLIDE_CART',
+      type: 'OPEN_VIEW',
       payload: {
-        open: false,
+        view: null
       },
     });
   };

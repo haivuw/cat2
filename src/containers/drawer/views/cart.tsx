@@ -15,18 +15,18 @@ export default function Cart() {
 
   const showCheckout = () => {
     dispatch({
-      type: 'TOGGLE_CHECKOUT_VIEW',
+      type: 'OPEN_VIEW',
       payload: {
-        showCheckout: true,
+        view: 'checkout'
       },
     });
   };
 
   const hideCart = () => {
     dispatch({
-      type: 'SLIDE_CART',
+      type: 'OPEN_VIEW',
       payload: {
-        open: false,
+        view: null
       },
     });
   };

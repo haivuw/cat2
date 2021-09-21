@@ -59,12 +59,12 @@ export default function ProductDetails() {
 
           <div className="flex flex-col items-start mb-4">
             <span className="text-gray-900 font-semibold mb-2">
-              {state.product.price && (
+              {state.product.price ? (
                 <>
                   {CURRENCY}
                   {state.product.price}
                 </>
-              )}
+              ) : null}
             </span>
             <span className="mb-3">{state.product.name}</span>
             <p className="flex items-center mb-5">

@@ -25,7 +25,6 @@ const initialState = {
 
 export default function User() {
   const { user, logout } = useAuth();
-  console.log(user) 
   const { dispatch } = useContext(DrawerContext);
   const [formData, setFormData] = useState(initialState);
   const [error, setError] = useState(null);

@@ -32,12 +32,12 @@ const ItemCard: React.FC<ItemCardProps> = ({ item, onClick }) => {
 
       <div className={ItemCardContent}>
         <span className={ItemCardPrice}>
-          {item.price && (
+          {item.price ? (
             <>
               {CURRENCY}
-              {item.price}
+              {item.price.toFixed(2)}
             </>
-          )}
+          ) : null}
         </span>
         <span className="text-13px">{item.name}</span>
       </div>

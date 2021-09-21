@@ -27,7 +27,8 @@ export default function Login() {
 
   const formik = useFormik({
     initialValues: initialState,
-    onSubmit: values => loginAndCloseDrawer(values),
+    onSubmit: (values, {setErrors}) => 
+      loginAndCloseDrawer(values).catch(e => setErrors({password: 'wrong email or password'})),
     validationSchema: yup.object().shape({
       email: yup.string().required(),
       password: yup.string().required()

@@ -59,8 +59,12 @@ export default function ProductDetails() {
 
           <div className="flex flex-col items-start mb-4">
             <span className="text-gray-900 font-semibold mb-2">
-              {CURRENCY}
-              {state.product.price}
+              {state.product.price && (
+                <>
+                  {CURRENCY}
+                  {state.product.price}
+                </>
+              )}
             </span>
             <span className="mb-3">{state.product.name}</span>
             <p className="flex items-center mb-5">
@@ -137,7 +141,7 @@ export default function ProductDetails() {
             onDecrement={() => removeItem(state.product)}
           />
         ) : (
-          <Button className="w-full big" onClick={addToCart}>
+          <Button disabled={!state.product?.price} className="w-full big" onClick={addToCart}>
             Add To Cart
           </Button>
         )}

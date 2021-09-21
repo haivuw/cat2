@@ -32,8 +32,12 @@ const ItemCard: React.FC<ItemCardProps> = ({ item, onClick }) => {
 
       <div className={ItemCardContent}>
         <span className={ItemCardPrice}>
-          {CURRENCY}
-          {item.price}
+          {item.price && (
+            <>
+              {CURRENCY}
+              {item.price}
+            </>
+          )}
         </span>
         <span className="text-13px">{item.name}</span>
       </div>

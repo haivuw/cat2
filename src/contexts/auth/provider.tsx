@@ -2,11 +2,14 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, User, UserCredential } from 'firebase/auth';
 import init from "services/firebase";
+import nookies from 'nookies'
+
 
 type AuthValue = {
   user: User,
   login: (email: string, password: string) => void;
-  logout: () => void
+  logout: () => void,
+  onChange: (callback: (User) => void) => void;
 }
 
 const Context = createContext<AuthValue>(null)
@@ -20,8 +23,14 @@ const auth = getAuth();
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState<User>();
 
+  const onChange = (callback) => onAuthStateChanged(auth, callback)
+
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => setUser(user))
+    onChange((user) => {
+      setUser(user)
+      if (user) nookies.set(null, 'email', user?.email, {path: '/'})
+      else nookies.destroy(null, 'email')
+    })
   }, [])
 
   const login: AuthValue['login'] = async (email, password) => {
@@ -34,7 +43,7 @@ const AuthProvider = ({ children }) => {
     setUser(null)
   }
 
-  return <Context.Provider value={{user, login, logout}}>{children}</Context.Provider>
+  return <Context.Provider value={{user, login, logout, onChange}}>{children}</Context.Provider>
 }
 
 export default AuthProvider
